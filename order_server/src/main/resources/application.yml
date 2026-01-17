@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  actuator:
+    endpoint:
+      health:
+        show-details: always
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+  sql:
+    init:
+      mode: always               # Ensures it runs even for non-embedded databases (MySQL/PostgreSQL)
+      continue-on-error: true    # Prevents app failure if data already exists (optional)
+    defer-datasource-initialization: true # Ensures script runs AFTER Hibernate creates tables
+    hibernate:
+      ddl-auto: update           # Or "create" if you want to rebuild the schema every time
+
